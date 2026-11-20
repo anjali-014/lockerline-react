@@ -6,7 +6,7 @@ import { api } from '../api.js';
  * first answer arrives. It runs again whenever one of `deps` changes; until the new answer arrives, the
  * screen keeps showing the last one.
  */
-function useLoad(load, deps) {
+export function useLoad(load, deps) {
   const [value, setValue] = useState(null);
 
   useEffect(() => {

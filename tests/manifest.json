@@ -164,5 +164,410 @@
     "exact_words": [
       "Continue as Mrs Rao"
     ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "on the home page the header has the logo and no ← button or person button",
+    "criterion": 0,
+    "what_should_happen": "On the home page the header shows only the LockerLine logo with \"Sunrise Heights · Tower A\" beside it. There is no ← button and no person button, because nobody has been chosen yet.",
+    "look_at": [
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "LockerLine",
+      "Sunrise Heights · Tower A",
+      "LockerLine home",
+      "Back to the home page"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "the ← button (Back to the home page) on a person's page goes home",
+    "criterion": 1,
+    "what_should_happen": "On a person's page, such as the courier's, the header has a ← button named \"Back to the home page\". Clicking it takes the address back to the home page.",
+    "look_at": [
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "Back to the home page"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "the logo on a person's page goes home",
+    "criterion": 1,
+    "what_should_happen": "The LockerLine logo is a link home on every page. Clicking it on the wall takes the address back to the home page.",
+    "look_at": [
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "LockerLine home"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "the person button shows Farida, Imran or the Rao family with their role and initial",
+    "criterion": 2,
+    "what_should_happen": "The person button in the header says whose screens these are. On the wall it shows F, Farida and Caretaker, and on the courier's page I, Imran and Courier. On the resident's page it shows R, \"Rao family\" and \"Resident · Flat 302\".",
+    "look_at": [
+      "src/components/Header.jsx",
+      "src/data/personas.js"
+    ],
+    "exact_words": [
+      "Farida",
+      "Caretaker",
+      "Imran",
+      "Courier",
+      "Rao family",
+      "Resident · Flat 302"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "criterion": 2,
+    "checked_by": "browser",
+    "reason": "The colour of each person's initial circle is only visible in a real browser."
+  },
+  {
+    "ticket": "F-02",
+    "test": "the person button opens \"View the parcel room as\" with Farida, Imran and the Rao family",
+    "criterion": 3,
+    "what_should_happen": "Clicking the person button on the wall opens a menu headed \"View the parcel room as\". It has exactly three options: Farida (Caretaker), Imran (Courier) and Rao family (Resident · Flat 302).",
+    "look_at": [
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "View the parcel room as",
+      "Farida",
+      "Caretaker",
+      "Imran",
+      "Courier",
+      "Rao family",
+      "Resident · Flat 302"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "criterion": 3,
+    "checked_by": "browser",
+    "reason": "The tick beside Farida is a drawing that screen readers skip, so only a real browser shows it."
+  },
+  {
+    "ticket": "F-02",
+    "test": "choosing Imran closes the menu and opens /courier with Imran in the header",
+    "criterion": 4,
+    "what_should_happen": "With the person menu open, choosing Imran closes the menu. The address becomes /courier and the person button now shows Imran.",
+    "look_at": [
+      "src/components/Header.jsx",
+      "src/data/personas.js"
+    ],
+    "exact_words": [
+      "Imran"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "pointing at the resident option opens \"Which resident are you?\" with the 16 flats, floor by floor",
+    "criterion": 5,
+    "what_should_happen": "Pointing at the resident option opens a panel headed \"Which resident are you?\" with Floor 1 to Floor 4. It lists the building's 16 flats, from 101 Iyer to 404 Jain, and only flat 302 is marked as the current one.",
+    "look_at": [
+      "src/components/Header.jsx",
+      "src/components/FlatGrid.jsx"
+    ],
+    "exact_words": [
+      "Which resident are you?",
+      "Floor 1",
+      "Floor 4",
+      "Iyer",
+      "Jain",
+      "Rao"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "the resident option opens the flats with Enter, as a click does",
+    "criterion": 5,
+    "what_should_happen": "The resident option also opens the flats when it is used like a button, with a click or with Enter from the keyboard. Tabbing to it and pressing Enter shows \"Which resident are you?\" and the 16 flats.",
+    "look_at": [
+      "src/components/Header.jsx",
+      "src/components/FlatGrid.jsx"
+    ],
+    "exact_words": [
+      "Which resident are you?"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "pointing at the resident option and then clicking it keeps the flats open",
+    "criterion": 5,
+    "what_should_happen": "With a mouse, the flats open as soon as the pointer is on the resident option. Clicking the option then must keep them open, so the resident can go on to choose a flat. A click that shuts them again is a mistake.",
+    "look_at": [
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "Which resident are you?"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "criterion": 5,
+    "checked_by": "browser",
+    "reason": "That the flats open beside the menu, in rows of four, and that 302 looks dark with a tick, are layout and colour."
+  },
+  {
+    "ticket": "F-02",
+    "test": "choosing 304 Chawla closes the menu and makes the app the Chawla family's on /resident",
+    "criterion": 6,
+    "what_should_happen": "Choosing flat 304 Chawla in the flats panel closes the menu and goes to /resident. The title row says \"Flat 304\" and \"Hello, Chawla family\", and the person button shows \"Chawla family\" with \"Resident · Flat 304\".",
+    "look_at": [
+      "src/components/Header.jsx",
+      "src/components/FlatGrid.jsx",
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "Chawla",
+      "Flat 304",
+      "Hello, Chawla family",
+      "Chawla family",
+      "Resident · Flat 304"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "a flat with a parcel waiting carries a dot, and the foot of the flats explains it",
+    "criterion": 7,
+    "what_should_happen": "A parcel waits for flat 302 before the page opens. In the flats panel, 302 carries a dot named \"A parcel is waiting\" while 304 has none, and the foot of the panel explains the dot with the same words.",
+    "look_at": [
+      "src/components/FlatGrid.jsx",
+      "src/components/Header.jsx",
+      "src/state/inbox.js"
+    ],
+    "exact_words": [
+      "A parcel is waiting"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "Esc closes the person menu and nothing changes",
+    "criterion": 8,
+    "what_should_happen": "With the person menu open on the wall, pressing Esc closes it. The page stays on the wall and Farida is still the person in the header.",
+    "look_at": [
+      "src/components/useDismiss.js",
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "Farida"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "a click outside the person menu closes it and nothing changes",
+    "criterion": 8,
+    "what_should_happen": "With the person menu open, clicking somewhere else on the page closes it. The page stays on the wall and Farida is still the person in the header.",
+    "look_at": [
+      "src/components/useDismiss.js",
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "Farida",
+      "The wall"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "clicking the person button again closes the menu and nothing changes",
+    "criterion": 8,
+    "what_should_happen": "The person button opens the menu and a second click on it closes the menu again. The page stays where it was.",
+    "look_at": [
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "Farida"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "after choosing flat 304, a refresh makes the app the Rao family of flat 302 again",
+    "criterion": 9,
+    "what_should_happen": "The chosen flat is kept only while the page is open. After choosing flat 304 and refreshing the page, the header shows the Rao family again and the page says \"Hello, Rao family\".",
+    "look_at": [
+      "src/state/LockerContext.jsx",
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "Chawla family",
+      "Rao family",
+      "Hello, Rao family"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "the wall's title row reads \"Tower A parcel room\" and \"The wall\", with The wall tab filled",
+    "criterion": 10,
+    "what_should_happen": "The wall's title row shows the small line \"Tower A parcel room\" and the heading \"The wall\". It has two tabs, \"The wall\" and \"Parcels\", and \"The wall\" is marked as the page you are on.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/components/SectionTabs.jsx"
+    ],
+    "exact_words": [
+      "Tower A parcel room",
+      "The wall",
+      "Parcels"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "criterion": 10,
+    "checked_by": "browser",
+    "reason": "The current tab being filled in Farida's colour is a colour."
+  },
+  {
+    "ticket": "F-02",
+    "test": "the Parcels tab opens /caretaker/parcels, whose title row reads \"Every drop, code and opening\" and \"Parcels\"",
+    "criterion": 11,
+    "what_should_happen": "Clicking the Parcels tab on the wall goes to /caretaker/parcels. Its title row shows \"Every drop, code and opening\" and the heading \"Parcels\", and now the Parcels tab is the one marked as current.",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx",
+      "src/components/SectionTabs.jsx",
+      "src/data/personas.js"
+    ],
+    "exact_words": [
+      "Every drop, code and opening",
+      "Parcels",
+      "The wall"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "with three lockers holding parcels the Parcels tab carries a badge with 3",
+    "criterion": 12,
+    "what_should_happen": "Three parcels sit in lockers before the wall opens. The Parcels tab carries a small badge with the number 3.",
+    "look_at": [
+      "src/components/SectionTabs.jsx"
+    ],
+    "exact_words": [
+      "Parcels"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "with no locker holding anything the Parcels tab has no badge",
+    "criterion": 12,
+    "what_should_happen": "On a fresh start no locker holds anything. The Parcels tab then reads just \"Parcels\", with no badge and no 0.",
+    "look_at": [
+      "src/components/SectionTabs.jsx"
+    ],
+    "exact_words": [
+      "Parcels",
+      "The wall"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "the courier's title row reads \"Drop-off · Tower A\" and \"Get a locker\", with no tabs",
+    "criterion": 13,
+    "what_should_happen": "Imran's page has the small line \"Drop-off · Tower A\" and the heading \"Get a locker\". The courier has only one page, so there are no tabs.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "Drop-off · Tower A",
+      "Get a locker"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "the resident with nothing waiting sees \"Flat 302\" and \"Hello, Rao family\", with no tabs",
+    "criterion": 14,
+    "what_should_happen": "With nothing waiting for flat 302, the resident's title row shows \"Flat 302\" and \"Hello, Rao family\". There are no tabs, because My parcels alone is not a choice.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx",
+      "src/components/SectionTabs.jsx"
+    ],
+    "exact_words": [
+      "Flat 302",
+      "Hello, Rao family",
+      "My parcels",
+      "Collect"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "with two parcels waiting the resident has the tabs My parcels and Collect, and Collect carries a badge with 2",
+    "criterion": 15,
+    "what_should_happen": "Two parcels wait for flat 302 before the page opens. The resident's title row then has two tabs, \"My parcels\" and \"Collect\", and Collect carries a badge with the number 2.",
+    "look_at": [
+      "src/components/SectionTabs.jsx",
+      "src/state/inbox.js"
+    ],
+    "exact_words": [
+      "My parcels",
+      "Collect"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "on /resident/collect with nothing waiting the title row reads \"Lobby keypad\" and \"Collect a parcel\", with both tabs",
+    "criterion": 16,
+    "what_should_happen": "On the Collect page the title row shows \"Lobby keypad\" and the heading \"Collect a parcel\". Even with nothing waiting both tabs show, Collect marked as current, so the resident can go back to My parcels.",
+    "look_at": [
+      "src/pages/resident/Collect.jsx",
+      "src/components/SectionTabs.jsx"
+    ],
+    "exact_words": [
+      "Lobby keypad",
+      "Collect a parcel",
+      "My parcels",
+      "Collect"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "/caretaker leads to /caretaker/wall",
+    "criterion": 17,
+    "what_should_happen": "Typing the short address /caretaker opens the wall. The address becomes /caretaker/wall and the heading reads \"The wall\".",
+    "look_at": [
+      "src/App.jsx"
+    ],
+    "exact_words": [
+      "The wall"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "/caretaker/parcels/P001 leads to /caretaker/parcels",
+    "criterion": 18,
+    "what_should_happen": "Typing an old parcel address such as /caretaker/parcels/P001 lands on the Parcels page. The address becomes /caretaker/parcels and the heading reads \"Parcels\".",
+    "look_at": [
+      "src/App.jsx"
+    ],
+    "exact_words": [
+      "Parcels"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "test": "an address the app does not have, such as /lobby, leads to the home page",
+    "criterion": 19,
+    "what_should_happen": "Typing an address the app does not have, such as /lobby, lands on the home page. The address becomes / and the header has only the logo.",
+    "look_at": [
+      "src/App.jsx"
+    ],
+    "exact_words": [
+      "LockerLine home",
+      "Back to the home page"
+    ]
+  },
+  {
+    "ticket": "F-02",
+    "criterion": 20,
+    "checked_by": "browser",
+    "reason": "The app's own slim scroll bar, dragging it and clicking its track need a real page height and a real mouse; a pretend browser has no layout."
+  },
+  {
+    "ticket": "F-02",
+    "criterion": 21,
+    "checked_by": "browser",
+    "reason": "Whether a page fits in the window depends on real heights, which a pretend browser does not measure."
   }
 ]
