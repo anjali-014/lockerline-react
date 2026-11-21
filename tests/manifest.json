@@ -1836,5 +1836,230 @@
       "Nothing waiting for you",
       "No parcels in the wall for flat 302"
     ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "the Collect page shows the line, six empty slots, \"Enter your code\", the twelve keys and \"Open my locker\"",
+    "criterion": 0,
+    "what_should_happen": "The Collect page says \"Key the six-digit code from your message. The locker holding your parcel opens, once.\" Below it are six empty slots, read out as \"Code: 0 of 6 digits\", the message \"Enter your code\", the keys 1 to 9, C (named Clear), 0 and ⌫ (named Delete), and the \"Open my locker\" button.",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Key the six-digit code from your message. The locker holding your parcel opens, once.",
+      "Code: 0 of 6 digits",
+      "Enter your code",
+      "C",
+      "Clear",
+      "⌫",
+      "Delete",
+      "Open my locker"
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "pressing 4, 8 and 2 fills the first three slots with 4, 8 and 2",
+    "criterion": 1,
+    "what_should_happen": "Pressing the keys 4, 8 and 2 puts those digits into the first three slots, in that order. The slots are read out as \"Code: 3 of 6 digits\".",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Code: 3 of 6 digits"
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "criterion": 1,
+    "checked_by": "browser",
+    "reason": "The fourth slot being marked as the next one is a highlight."
+  },
+  {
+    "ticket": "F-08",
+    "test": "with six digits keyed, another digit changes nothing",
+    "criterion": 2,
+    "what_should_happen": "Once six digits are keyed, pressing another digit changes nothing. The slots still hold the same six digits and read \"Code: 6 of 6 digits\".",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Code: 6 of 6 digits"
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "⌫ takes the last digit away",
+    "criterion": 3,
+    "what_should_happen": "With 4, 8 and 2 keyed, pressing ⌫ (Delete) takes away the last digit. The slots hold 4 and 8 and read \"Code: 2 of 6 digits\".",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Delete",
+      "Code: 2 of 6 digits"
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "C empties every slot",
+    "criterion": 4,
+    "what_should_happen": "With digits keyed, pressing C (Clear) empties every slot. The slots read \"Code: 0 of 6 digits\" and show no digits.",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Clear",
+      "Code: 0 of 6 digits"
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "the keyboard keys digits, Backspace takes the last one away and Escape clears them all",
+    "criterion": 5,
+    "what_should_happen": "Typing 4, 8 and 2 on the keyboard fills three slots. Backspace takes the last digit away, leaving two, and Escape clears them all.",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Code: 3 of 6 digits",
+      "Code: 2 of 6 digits",
+      "Code: 0 of 6 digits"
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "with six digits keyed, Enter on the keyboard does the same as \"Open my locker\"",
+    "criterion": 6,
+    "what_should_happen": "With six digits keyed, pressing Enter on the keyboard sends the code just as \"Open my locker\" does. A code that matches no parcel then gets \"That code doesn't match a parcel. Check the digits and try again.\"",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "That code doesn't match a parcel",
+      "Check the digits and try again."
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "after pressing screen keys, Enter only does what \"Open my locker\" does: the code stays as keyed",
+    "criterion": 6,
+    "what_should_happen": "After pressing 1 and 2 on the screen keys, pressing Enter on the keyboard does only what \"Open my locker\" does. The slots, read out as \"Code: 2 of 6 digits\", still hold 1 and 2, and the message reads \"Enter all six digits. The code from your message has six digits.\"",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Code: 2 of 6 digits",
+      "Enter all six digits",
+      "The code from your message has six digits."
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "\"Open my locker\" with four digits says \"Enter all six digits.\" and nothing else happens",
+    "criterion": 7,
+    "what_should_happen": "With only four digits keyed, pressing \"Open my locker\" says \"Enter all six digits. The code from your message has six digits.\" Nothing else happens: the four digits stay and the keypad stays.",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Open my locker",
+      "Enter all six digits",
+      "The code from your message has six digits.",
+      "Code: 4 of 6 digits"
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "criterion": 7,
+    "checked_by": "browser",
+    "reason": "The slots shaking is an animation."
+  },
+  {
+    "ticket": "F-08",
+    "test": "six digits that are no parcel's code get \"That code doesn't match a parcel.\" and no locker opens",
+    "criterion": 8,
+    "what_should_happen": "A parcel waits in the wall, but the six digits keyed are not its code. \"Open my locker\" gets the alert \"That code doesn't match a parcel. Check the digits and try again.\", and the keypad stays with the six digits, so no locker opened.",
+    "look_at": [
+      "src/pages/resident/Collect.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Open my locker",
+      "That code doesn't match a parcel",
+      "Check the digits and try again.",
+      "Code: 6 of 6 digits"
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "criterion": 8,
+    "checked_by": "browser",
+    "reason": "The slots shaking and turning red are an animation and a colour."
+  },
+  {
+    "ticket": "F-08",
+    "test": "the code of a parcel whose free window has ended gets \"This code has expired.\"",
+    "criterion": 9,
+    "what_should_happen": "A parcel's code is keyed in after its 48-hour free window has ended. \"Open my locker\" gets \"This code has expired. Its free window has ended, so it can no longer open the locker.\"",
+    "look_at": [
+      "src/pages/resident/Collect.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Open my locker",
+      "This code has expired",
+      "Its free window has ended, so it can no longer open the locker."
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "a code that has already opened its locker gets \"This code was already used.\"",
+    "criterion": 10,
+    "what_should_happen": "A code that has already opened its locker is keyed in again. \"Open my locker\" gets \"This code was already used. A code opens its locker once. The parcel has been collected.\"",
+    "look_at": [
+      "src/pages/resident/Collect.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Open my locker",
+      "This code was already used",
+      "A code opens its locker once. The parcel has been collected."
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "test": "after a refusal any key brings \"Enter your code\" back, and \"Open my locker\" refuses again",
+    "criterion": 11,
+    "what_should_happen": "While a refusal is showing, pressing any key, here ⌫, brings back \"Enter your code\". Pressing \"Open my locker\" again shows the refusal again.",
+    "look_at": [
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Enter all six digits",
+      "The code from your message has six digits.",
+      "Delete",
+      "Enter your code",
+      "Open my locker"
+    ]
+  },
+  {
+    "ticket": "F-08",
+    "criterion": 11,
+    "checked_by": "browser",
+    "reason": "The slots shaking a second time is an animation."
+  },
+  {
+    "ticket": "F-08",
+    "test": "coming from a parcel card's button on My parcels, the six slots already hold that parcel's code",
+    "criterion": 12,
+    "what_should_happen": "On My parcels the resident presses the Collect button on a parcel's card. The Collect page opens with the six slots already holding that parcel's code, read out as \"Code: 6 of 6 digits\".",
+    "look_at": [
+      "src/pages/resident/Collect.jsx",
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "Collect",
+      "Code: 6 of 6 digits"
+    ]
   }
 ]

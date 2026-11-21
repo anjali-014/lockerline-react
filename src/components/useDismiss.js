@@ -14,6 +14,7 @@ export default function useDismiss(ref, open, onClose) {
 
     function onKey(e) {
       if (e.key !== 'Escape') return;
+      e.preventDefault();   // the Escape is used up here: a page listening for it (the keypad) leaves it alone
       onClose();
     }
 

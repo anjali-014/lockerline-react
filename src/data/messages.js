@@ -10,6 +10,7 @@ const FIELD_WORDS = {
   sizeClass: 'Pick a size: small, medium or large.',
   state: 'Pick a state: free or holding.',
   flat: 'Type the flat number first.',
+  code: 'Key the six-digit code from your message.',
 };
 
 /** The words under each field of the drop-off form, for the fields the backend could not take. */
@@ -62,6 +63,9 @@ export function explain(answer, about = {}) {
         text: sizes.length ? `Free right now: ${sizes.join(' and ')}.` : 'Every locker in the wall is holding a parcel.',
       };
     }
+    case '/errors/no-such-code': return { title: "That code doesn't match a parcel", text: 'Check the digits and try again.' };
+    case '/errors/code-expired': return { title: 'This code has expired', text: 'Its free window has ended, so it can no longer open the locker.' };
+    case '/errors/code-used': return { title: 'This code was already used', text: 'A code opens its locker once. The parcel has been collected.' };
     default:
       return { title: 'That did not work', text: 'Please try again.' };
   }
