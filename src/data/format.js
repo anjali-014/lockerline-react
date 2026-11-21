@@ -25,3 +25,7 @@ export function formatDuration(seconds) {
   if (hours) return `${hours}h ${minutes}m`;
   return `${minutes}m`;
 }
+
+export function formatCode(code) {
+  return `${code.slice(0, 3)} ${code.slice(3)}`;
+}

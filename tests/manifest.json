@@ -1592,5 +1592,249 @@
       "LockerLine home",
       "Continue as Farida"
     ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "with nothing dropped for flat 302 the page says \"Nothing waiting for you\" with the empty message",
+    "criterion": 0,
+    "what_should_happen": "Nothing has been dropped for flat 302. The heading says \"Nothing waiting for you\", with \"No parcels in the wall for flat 302\" and \"When a courier drops one, you get a message with the locker and your pickup code, and it appears here.\" under it.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "Nothing waiting for you",
+      "No parcels in the wall for flat 302",
+      "When a courier drops one, you get a message with the locker and your pickup code, and it appears here."
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "one medium parcel in D22 gives \"1 parcel waiting\" and one card with \"Waiting in locker\", \"D22\" and \"Medium\"",
+    "criterion": 1,
+    "what_should_happen": "One medium parcel waits in D22 for flat 302. The heading says \"1 parcel waiting\" and there is one card reading \"Waiting in locker\", \"D22\" and \"Medium\".",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "1 parcel waiting",
+      "Waiting in locker",
+      "D22",
+      "Medium"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "two parcels give \"2 parcels waiting\" and two cards, the oldest first",
+    "criterion": 1,
+    "what_should_happen": "Two parcels wait for flat 302. The heading says \"2 parcels waiting\" and there are two cards, the parcel dropped first on the first card.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx",
+      "src/state/inbox.js"
+    ],
+    "exact_words": [
+      "2 parcels waiting",
+      "Waiting in locker"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "a card's code reads \"Your pickup code · from your message\" and \"••• •••\", with the digits hidden",
+    "criterion": 2,
+    "what_should_happen": "Each card has the pickup code from the resident's message, hidden. It reads \"Your pickup code · from your message\" and \"••• •••\", and the six digits are nowhere on the page.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "Your pickup code · from your message",
+      "••• •••"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "Show reveals the six digits in two groups of three and becomes Hide; Hide hides them again",
+    "criterion": 3,
+    "what_should_happen": "Pressing Show reveals the six digits of the code in two groups of three, and the button now says Hide. Pressing Hide hides them behind \"••• •••\" again and the button says Show.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx",
+      "src/data/format.js"
+    ],
+    "exact_words": [
+      "Show",
+      "Hide",
+      "••• •••"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "a parcel dropped 4 hours ago reads \"Valid for 1d 20h more · until Thu 5 Nov, 14:30\"",
+    "criterion": 4,
+    "what_should_happen": "The parcel was dropped at 14:30 on Tuesday and it is now four hours later. Its card reads \"Valid for 1d 20h more · until Thu 5 Nov, 14:30\".",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx",
+      "src/data/format.js"
+    ],
+    "exact_words": [
+      "Valid for 1d 20h more · until Thu 5 Nov, 14:30"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "criterion": 4,
+    "checked_by": "browser",
+    "reason": "The bar showing how much of the window is left is a drawn width."
+  },
+  {
+    "ticket": "F-07",
+    "criterion": 5,
+    "checked_by": "browser",
+    "reason": "The bar turning to its warning colour is only a colour, with no words."
+  },
+  {
+    "ticket": "F-07",
+    "test": "a card's foot says \"Arrived\" with the day and time of the drop, and has a Collect button",
+    "criterion": 6,
+    "what_should_happen": "A parcel was dropped at 14:30 on Tuesday 3 November. Its card's foot reads \"Arrived Tue 3 Nov, 14:30\" and has a Collect button.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "Arrived",
+      "Collect"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "Collect opens the Collect page",
+    "criterion": 7,
+    "what_should_happen": "The code is still valid and the resident presses Collect. The address becomes /resident/collect, the page where the code is keyed in.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "Collect"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "after the free window has ended the card says the code expired and the button reads \"Try the code anyway\"",
+    "criterion": 8,
+    "what_should_happen": "The parcel in D22 is still there after its code's 48-hour window has ended. Instead of the time left, the card says \"This code expired on Thu 5 Nov, 14:30. Your parcel is still in locker D22, but this code can no longer open it.\", and its button reads \"Try the code anyway\" instead of Collect.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "This code expired on Thu 5 Nov, 14:30. Your parcel is still in locker D22, but this code can no longer open it.",
+      "Valid for",
+      "Try the code anyway",
+      "Collect"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "\"Try the code anyway\" opens the Collect page",
+    "criterion": 9,
+    "what_should_happen": "The code has expired and the resident presses \"Try the code anyway\". The address becomes /resident/collect, the page where the code is keyed in.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "Try the code anyway"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "two collected parcels show under \"Collected\" 2, the most recently dropped first, with their times and wait",
+    "criterion": 10,
+    "what_should_happen": "Two parcels were dropped an hour apart on Thursday and both collected at 14:30. Under the \"Collected\" heading with the count 2, the parcel dropped last comes first, with its locker, \"Medium locker\", its id, \"Arrived Thu 5 Nov, 11:10\", \"Collected\" Thu 5 Nov, 14:30, \"Waited 3h 20m\" and \"Picked up 1d 20h before the code expired\".",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx",
+      "src/pages/resident/CollectedCard.jsx"
+    ],
+    "exact_words": [
+      "Collected",
+      "Medium locker",
+      "Arrived",
+      "Waited 3h 20m",
+      "Picked up 1d 20h before the code expired"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "criterion": 10,
+    "checked_by": "browser",
+    "reason": "The parcel's box with a tick is a drawing hidden from screen readers."
+  },
+  {
+    "ticket": "F-07",
+    "test": "a parcel collected within a minute of arriving reads \"Waited less than a minute\"",
+    "criterion": 11,
+    "what_should_happen": "A parcel was collected straight after it was dropped. Its collected card reads \"Waited less than a minute\".",
+    "look_at": [
+      "src/pages/resident/CollectedCard.jsx",
+      "src/pages/resident/TakeParcel.jsx"
+    ],
+    "exact_words": [
+      "Waited",
+      "less than a minute",
+      "Collected"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "with nothing waiting but a parcel collected earlier, the empty message and the Collected section both show",
+    "criterion": 12,
+    "what_should_happen": "Nothing is waiting for flat 302, but a parcel was collected earlier. The page shows \"Nothing waiting for you\" with the empty message, and the Collected section under them.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "Nothing waiting for you",
+      "No parcels in the wall for flat 302",
+      "Collected"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "with parcels waiting for 302 and 304, switching to flat 304 in the header shows only 304's parcels",
+    "criterion": 13,
+    "what_should_happen": "Parcels wait for both flat 302 and flat 304. After switching to flat 304 in the header, only the parcel for 304 shows and the one for 302 is gone.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx",
+      "src/components/Header.jsx"
+    ],
+    "exact_words": [
+      "Rao family",
+      "Waiting in locker"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "with the page left open for a minute, \"Valid for … more · until …\" counts down by itself",
+    "criterion": 14,
+    "what_should_happen": "A parcel's code has about seven and a half hours left. With the page left open for a minute and no reload, the \"Valid for … more · until Thu 5 Nov, 14:30\" line changes by itself to show less time.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx",
+      "src/state/LockerContext.jsx"
+    ],
+    "exact_words": [
+      "Valid for",
+      "more · until",
+      "Thu 5 Nov, 14:30"
+    ]
+  },
+  {
+    "ticket": "F-07",
+    "test": "before the flat's messages and parcels are read only the title row shows",
+    "criterion": 15,
+    "what_should_happen": "In the first moment, before the flat's messages and parcels have been read, only the title row with \"Hello, Rao family\" shows. There is no \"Nothing waiting for you\" that might be wrong, and a moment later it appears.",
+    "look_at": [
+      "src/pages/resident/MyParcels.jsx",
+      "src/hooks/useLoad.js"
+    ],
+    "exact_words": [
+      "Hello, Rao family",
+      "Nothing waiting for you",
+      "No parcels in the wall for flat 302"
+    ]
   }
 ]
