@@ -1,8 +1,11 @@
+import { formatDuration } from '../data/format.js';
+
 /**
  *  One locker door, drawn as a real panel: a dark recess behind a brushed-aluminium door with a
- * number plate, a handle and a status light. A holding door carries an orange parcel tag.
+ * number plate, a handle and a status light. A holding door
+ * carries an orange parcel tag and shows how long it has waited (`dwellSeconds`).
  */
-export default function Locker({ door, style }) {
+export default function Locker({ door, showWait = true, style }) {
   const holding = door.state === 'holding';
   return (
     <div style={style} className={`locker size-${door.size} is-${door.state}`}>
@@ -14,7 +17,10 @@ export default function Locker({ door, style }) {
         <span className="locker-plate">{door.no}</span>
         <span className="locker-handle" />
         <span className="locker-light" />
+        {holding && showWait && door.dwellSeconds !== undefined && (
+          <span className="locker-wait">{formatDuration(door.dwellSeconds)}</span>
+        )}
       </span>
-          </div>
+    </div>
   );
 }

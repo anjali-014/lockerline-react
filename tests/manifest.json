@@ -569,5 +569,163 @@
     "criterion": 21,
     "checked_by": "browser",
     "reason": "Whether a page fits in the window depends on real heights, which a pretend browser does not measure."
+  },
+  {
+    "ticket": "F-03",
+    "test": "on an empty wall the five count cards read 48, 48, 0, \"—\" and 0 with their notes",
+    "criterion": 0,
+    "what_should_happen": "On a fresh start every locker is free. The five count cards read \"Total lockers\" 48 with \"20 small · 20 medium · 8 large\", \"Free lockers\" 48 with \"ready for a parcel\", \"Holding parcels\" 0 with \"nothing dropped yet\", \"Longest wait\" \"—\" with \"dwell time\", and \"Codes expired\" 0 with \"all codes still valid\".",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Total lockers",
+      "20 small · 20 medium · 8 large",
+      "Free lockers",
+      "ready for a parcel",
+      "Holding parcels",
+      "nothing dropped yet",
+      "Longest wait",
+      "—",
+      "dwell time",
+      "Codes expired",
+      "all codes still valid"
+    ]
+  },
+  {
+    "ticket": "F-03",
+    "test": "the wall shows three banks in number order: Small D01 to D20, Medium D21 to D40, Large D41 to D48, all free",
+    "criterion": 1,
+    "what_should_happen": "The wall has three banks, read out as Small lockers, Medium lockers and Large lockers, in that order. Small holds D01 to D20 and reads \"20/20 free\", Medium holds D21 to D40 with \"20/20 free\", and Large holds D41 to D48 with \"8/8 free\", every bank in number order.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/components/Locker.jsx"
+    ],
+    "exact_words": [
+      "Small",
+      "Medium",
+      "Large",
+      "Small lockers",
+      "Medium lockers",
+      "Large lockers",
+      "20/20 free",
+      "8/8 free"
+    ]
+  },
+  {
+    "ticket": "F-03",
+    "criterion": 1,
+    "checked_by": "browser",
+    "reason": "Each door's light showing free is a colour."
+  },
+  {
+    "ticket": "F-03",
+    "test": "a parcel that has waited 3h 30m in D21 shows on its door and in the count cards",
+    "criterion": 2,
+    "what_should_happen": "A medium parcel went into D21 three and a half hours before the wall opens. Door D21 reads \"3h 30m\", the Medium bank reads \"19/20 free\", and the cards read \"Holding parcels\" 1 with \"waiting for residents\", \"Free lockers\" 47 and \"Longest wait\" \"3h 30m\".",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/components/Locker.jsx",
+      "src/data/format.js"
+    ],
+    "exact_words": [
+      "3h 30m",
+      "19/20 free",
+      "Holding parcels",
+      "waiting for residents",
+      "Free lockers",
+      "Longest wait"
+    ]
+  },
+  {
+    "ticket": "F-03",
+    "criterion": 2,
+    "checked_by": "browser",
+    "reason": "The parcel drawn inside D21 and its light showing holding are a drawing and a colour."
+  },
+  {
+    "ticket": "F-03",
+    "test": "waits of 5 minutes, 3 hours 30 minutes and 1 day 20 hours read \"5m\", \"3h 30m\" and \"1d 20h\", the longest in the card",
+    "criterion": 3,
+    "what_should_happen": "Three parcels have waited 5 minutes, 3 hours 30 minutes and 1 day 20 hours. Their doors read \"5m\", \"3h 30m\" and \"1d 20h\", and \"Longest wait\" reads \"1d 20h\".",
+    "look_at": [
+      "src/components/Locker.jsx",
+      "src/data/format.js",
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "5m",
+      "3h 30m",
+      "1d 20h",
+      "Longest wait"
+    ]
+  },
+  {
+    "ticket": "F-03",
+    "test": "a parcel still in its locker after its 48-hour free window counts in \"Codes expired\"",
+    "criterion": 4,
+    "what_should_happen": "One parcel has sat in its locker for just over 48 hours, past its code's free window, while another went in more recently. The \"Codes expired\" card reads 1 with \"parcels past their free window\".",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Codes expired",
+      "parcels past their free window"
+    ]
+  },
+  {
+    "ticket": "F-03",
+    "criterion": 4,
+    "checked_by": "browser",
+    "reason": "The card standing out as a warning is a colour."
+  },
+  {
+    "ticket": "F-03",
+    "test": "the legend under the wall shows \"Free\" and \"Holding a parcel\"",
+    "criterion": 5,
+    "what_should_happen": "Under the wall a legend explains the two states. It reads \"Free\" and \"Holding a parcel\".",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Free",
+      "Holding a parcel"
+    ]
+  },
+  {
+    "ticket": "F-03",
+    "criterion": 5,
+    "checked_by": "browser",
+    "reason": "The colour beside each word of the legend can only be seen in a real browser."
+  },
+  {
+    "ticket": "F-03",
+    "test": "before the wall is read no count cards and no doors show, then they appear",
+    "criterion": 6,
+    "what_should_happen": "In the first moment, before the wall has answered, there are no count cards and no doors, not even zeros. As soon as the wall is read the cards appear with \"Total lockers\" 48 and all 48 doors show.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/hooks/useLoad.js"
+    ],
+    "exact_words": [
+      "Total lockers",
+      "Codes expired",
+      "20 small · 20 medium · 8 large"
+    ]
+  },
+  {
+    "ticket": "F-03",
+    "test": "with the wall left open for a minute, D21's waiting time and \"Longest wait\" grow by themselves",
+    "criterion": 7,
+    "what_should_happen": "D21 has held a parcel for 3h 30m when the wall opens. After a minute with the page left open, without a reload, D21 and \"Longest wait\" no longer read \"3h 30m\" but a minute more.",
+    "look_at": [
+      "src/state/LockerContext.jsx",
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "3h 30m",
+      "Longest wait"
+    ]
   }
 ]

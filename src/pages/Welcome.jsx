@@ -36,10 +36,10 @@ export default function Welcome() {
         <div className="hero-art" aria-hidden="true">
           <div className="hero-bank">
             <div className="hero-bank-small">
-              {preview.slice(0, 9).map((d, i) => <Locker key={d.no} door={d} style={{ '--i': i }} />)}
+              {preview.slice(0, 9).map((d, i) => <Locker key={d.no} door={d} showWait={false} style={{ '--i': i }} />)}
             </div>
             <div className="hero-bank-large">
-              {preview.slice(9).map((d, i) => <Locker key={d.no} door={d} style={{ '--i': i + 9 }} />)}
+              {preview.slice(9).map((d, i) => <Locker key={d.no} door={d} showWait={false} style={{ '--i': i + 9 }} />)}
             </div>
           </div>
         </div>

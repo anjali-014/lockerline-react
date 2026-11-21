@@ -1,6 +1,12 @@
-// The building as the screens name it: tower A and its 16 flats.
+// The building as the screens name it: tower A, its three locker sizes and its 16 flats.
 
 export const BUILDING = { name: 'Sunrise Heights', tower: 'A' };
+
+export const SIZES = [
+  { id: 'S', name: 'Small' },
+  { id: 'M', name: 'Medium' },
+  { id: 'L', name: 'Large' },
+];
 
 /** The flats and their families, floor by floor. */
 export const RESIDENTS = [
