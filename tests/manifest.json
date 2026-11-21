@@ -1393,5 +1393,204 @@
       "Monitors, cartons, luggage",
       "8 free"
     ]
+  },
+  {
+    "ticket": "F-06",
+    "test": "when D21 is given, the step panel shows D21 open with parcel P001 for Flat 302 beside it",
+    "criterion": 0,
+    "what_should_happen": "Imran asks for a medium locker for 302 and the wall gives D21. The panel shows two steps, \"Put the parcel in the locker\" and \"Locker closed\", and a parcel labelled \"P001\" and \"Flat 302\" waits beside the locker, with \"Drag the parcel into D21\" and \"Or tap the parcel. The locker closes by itself.\"",
+    "look_at": [
+      "src/pages/courier/PlaceParcel.jsx",
+      "src/components/ParcelBox.jsx"
+    ],
+    "exact_words": [
+      "Put the parcel in the locker",
+      "Locker closed",
+      "Parcel P001 for flat 302. Put it in locker D21",
+      "P001",
+      "Flat 302",
+      "Drag the parcel into D21",
+      "Or tap the parcel. The locker closes by itself."
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "criterion": 0,
+    "checked_by": "browser",
+    "reason": "Step 1 being marked as the current one and D21 standing open and empty are a highlight and a drawing."
+  },
+  {
+    "ticket": "F-06",
+    "test": "while the step panel is open the form is locked",
+    "criterion": 1,
+    "what_should_happen": "While the step panel is open the form cannot be used. The three sizes, the flat box and the \"Get a locker\" button are all switched off.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "Get a locker"
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "test": "putting the parcel in (the tap that stands in for a drag) moves the panel to \"Closing the locker…\"",
+    "criterion": 2,
+    "what_should_happen": "Putting the parcel into D21 (a pretend browser cannot drag, so the tap that does the same job is used) takes the parcel away from beside the locker. The caption changes to \"Closing the locker…\".",
+    "look_at": [
+      "src/pages/courier/PlaceParcel.jsx"
+    ],
+    "exact_words": [
+      "Closing the locker…",
+      "Drag the parcel into D21"
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "criterion": 2,
+    "checked_by": "browser",
+    "reason": "Dragging with a mouse, the locker lighting up while the parcel is held over it, and the steps' ticks need a real browser."
+  },
+  {
+    "ticket": "F-06",
+    "test": "tapping the parcel with a finger puts it in the same way",
+    "criterion": 3,
+    "what_should_happen": "A tap with a finger on the parcel puts it in, the same as a drag. The parcel leaves its place beside the locker and the caption says \"Closing the locker…\".",
+    "look_at": [
+      "src/pages/courier/PlaceParcel.jsx"
+    ],
+    "exact_words": [
+      "Closing the locker…"
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "test": "about a second after the parcel goes in, the panel says \"D21 is closed and holding P001\"",
+    "criterion": 4,
+    "what_should_happen": "Right after the parcel goes in the door is still closing. About a second later the door has closed by itself and the panel says \"D21 is closed and holding P001\" and \"The wall shows it holding.\"",
+    "look_at": [
+      "src/pages/courier/PlaceParcel.jsx"
+    ],
+    "exact_words": [
+      "D21 is closed and holding P001",
+      "The wall shows it holding.",
+      "Closing the locker…"
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "criterion": 4,
+    "checked_by": "browser",
+    "reason": "Both steps showing a tick is a drawing that screen readers skip."
+  },
+  {
+    "ticket": "F-06",
+    "test": "the message to the resident first says it is sending, then that it was delivered with until when the code works",
+    "criterion": 5,
+    "what_should_happen": "Once the locker has closed, the message first reads \"Sending the pickup code to Flat 302\". A moment later it reads \"Pickup code sent to Flat 302\", \"SMS delivered to the Rao family\" and \"The code is valid until Thu 5 Nov, 14:30, counted from the drop.\", 48 hours after the 14:30 drop on Tuesday.",
+    "look_at": [
+      "src/pages/courier/CodeSent.jsx",
+      "src/data/format.js"
+    ],
+    "exact_words": [
+      "Sending the pickup code to Flat 302",
+      "Pickup code sent to Flat 302",
+      "SMS delivered to the Rao family",
+      "The code is valid until Thu 5 Nov, 14:30, counted from the drop."
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "criterion": 5,
+    "checked_by": "browser",
+    "reason": "The moving dots while the message is sending are an animation."
+  },
+  {
+    "ticket": "F-06",
+    "test": "when the drop is done the pickup code appears nowhere on the courier's screen",
+    "criterion": 6,
+    "what_should_happen": "The pickup code goes only to the resident's phone. When the drop is finished, its six digits appear nowhere on the courier's screen, neither together nor in two groups of three.",
+    "look_at": [
+      "src/pages/courier/PlaceParcel.jsx",
+      "src/pages/courier/CodeSent.jsx"
+    ],
+    "exact_words": [
+      "The wall shows it holding.",
+      "See as resident"
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "test": "\"See as resident\" for a parcel to 304 opens /resident?flat=304 as the Chawla family",
+    "criterion": 7,
+    "what_should_happen": "After a parcel for flat 304 is delivered, the courier clicks \"See as resident\". The address becomes /resident?flat=304, the page says \"Hello, Chawla family\" and the header shows the Chawla family.",
+    "look_at": [
+      "src/pages/courier/CodeSent.jsx",
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "See as resident",
+      "Hello, Chawla family"
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "test": "OK takes the step panel away and leaves the form unlocked and empty",
+    "criterion": 8,
+    "what_should_happen": "When the drop is done, pressing OK takes the step panel away and \"Your locker appears here\" is back. The form is unlocked again, with no size chosen and an empty flat box.",
+    "look_at": [
+      "src/pages/courier/PlaceParcel.jsx",
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "OK",
+      "Put the parcel in the locker",
+      "Your locker appears here"
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "test": "the title row goes from \"0 dropped this round\" to \"2 dropped this round\" after two lockers are given",
+    "criterion": 9,
+    "what_should_happen": "The courier's page opens with \"0 dropped this round\" in the title row. After one drop is finished and a second locker is given, it reads \"2 dropped this round\".",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "0 dropped this round",
+      "2 dropped this round",
+      "OK"
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "test": "leaving the courier's page and coming back starts the count again at 0",
+    "criterion": 10,
+    "what_should_happen": "After one drop the title row reads \"1 dropped this round\". Going home and coming back as Imran starts the count again at \"0 dropped this round\".",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "1 dropped this round",
+      "0 dropped this round",
+      "OK",
+      "LockerLine home",
+      "Continue as Imran"
+    ]
+  },
+  {
+    "ticket": "F-06",
+    "test": "after a parcel has gone into D21, the wall shows D21 holding",
+    "criterion": 11,
+    "what_should_happen": "A parcel has just gone into D21. Going home and on to Farida's wall, door D21 is shown holding a parcel.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/components/Locker.jsx"
+    ],
+    "exact_words": [
+      "D21",
+      "holding",
+      "LockerLine home",
+      "Continue as Farida"
+    ]
   }
 ]
