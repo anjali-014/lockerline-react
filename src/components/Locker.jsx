@@ -5,15 +5,23 @@ import { formatDuration } from '../data/format.js';
  * number plate, a handle and a status light. A holding door
  * carries an orange parcel tag and shows how long it has waited (`dwellSeconds`).
  */
-export default function Locker({ door, showWait = true, style }) {
+export default function Locker({ door, selected = false, showWait = true, onClick, style }) {
   const holding = door.state === 'holding';
+  const Tag = onClick ? 'button' : 'div';
+
   return (
-    <div style={style} className={`locker size-${door.size} is-${door.state}`}>
+    <Tag
+      type={onClick ? 'button' : undefined}
+      onClick={onClick}
+      style={style}
+      className={`locker size-${door.size} is-${door.state}${selected ? ' is-selected' : ''}`}
+      aria-label={onClick ? `Locker ${door.no}, ${holding ? 'holding a parcel' : 'free'}` : undefined}
+    >
       {/* the inside of the locker: what is drawn here sits behind the door and is cut to the opening */}
       <span className="locker-recess" aria-hidden="true">
         {holding && <span className="locker-parcel" />}
       </span>
-      <span className="locker-door" aria-hidden="true">
+      <span className="locker-door" aria-hidden={!onClick}>
         <span className="locker-plate">{door.no}</span>
         <span className="locker-handle" />
         <span className="locker-light" />
@@ -21,6 +29,6 @@ export default function Locker({ door, showWait = true, style }) {
           <span className="locker-wait">{formatDuration(door.dwellSeconds)}</span>
         )}
       </span>
-    </div>
+    </Tag>
   );
 }

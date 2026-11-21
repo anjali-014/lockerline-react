@@ -9,7 +9,7 @@
 - [x] Ticket 1 · The front door
 - [x] Ticket 2 · Moving between people
 - [x] Ticket 3 · The wall
-- [ ] Ticket 4 · Finding one locker
+- [x] Ticket 4 · Finding one locker
 - [ ] Ticket 5 · The courier asks for a locker
 - [ ] Ticket 6 · Putting the parcel in
 - [ ] Ticket 7 · My parcels

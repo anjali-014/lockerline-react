@@ -8,6 +8,10 @@ export const SIZES = [
   { id: 'L', name: 'Large' },
 ];
 
+export function sizeName(id) {
+  return SIZES.find((s) => s.id === id)?.name ?? id;
+}
+
 /** The flats and their families, floor by floor. */
 export const RESIDENTS = [
   { flat: '101', name: 'Iyer' }, { flat: '102', name: 'Banerjee' }, { flat: '103', name: 'Fernandes' },

@@ -727,5 +727,381 @@
       "3h 30m",
       "Longest wait"
     ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "with no filter \"All sizes\" and \"Any state\" are pressed, the find box is empty and no count line shows",
+    "criterion": 0,
+    "what_should_happen": "When the wall opens with no filter, \"All sizes\" and \"Any state\" are the pressed buttons and the others are not. The \"Find a locker, e.g. D07\" box is empty and there is no count line yet.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "All sizes",
+      "Any state",
+      "Small",
+      "Medium",
+      "Large",
+      "Free",
+      "Holding",
+      "Find a locker, e.g. D07"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "pressing Large shows only the Large bank, puts ?size=L in the address and reads \"8 shown · 8 free\"",
+    "criterion": 1,
+    "what_should_happen": "Pressing Large leaves only the Large bank, D41 to D48, on the wall. The address ends in ?size=L, Large shows as pressed, and the count line reads \"8 shown · 8 free\".",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Large",
+      "8 shown · 8 free"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "pressing Free after Large shows only the free large doors, with size=L and state=free in the address",
+    "criterion": 2,
+    "what_should_happen": "One large parcel sits in D41. With Large pressed, pressing Free leaves only the seven free large doors, D42 to D48, and the count line reads \"7 shown · 7 free\". The address holds both size=L and state=free.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Large",
+      "Free",
+      "8 shown · 7 free",
+      "7 shown · 7 free"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "pressing \"All sizes\" and \"Any state\" brings every door back and takes the filters out of the address",
+    "criterion": 3,
+    "what_should_happen": "The wall opens with Medium and Free pressed. Pressing \"All sizes\" and then \"Any state\" brings all 48 doors back, the address goes back to /caretaker/wall with no filters, and the count line goes away.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "All sizes",
+      "Any state",
+      "20 shown · 20 free"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "opening /caretaker/wall?size=M&state=holding has Medium and Holding pressed and shows only holding medium doors",
+    "criterion": 4,
+    "what_should_happen": "A medium parcel sits in D21 and a small one in D01. Opening the wall at /caretaker/wall?size=M&state=holding, as from a link or a reload, already has Medium and Holding pressed. Only D21 shows, and the count line reads \"1 shown · 0 free\".",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Medium",
+      "Holding",
+      "1 shown · 0 free"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "with filters pressed the count cards still count the whole wall",
+    "criterion": 5,
+    "what_should_happen": "On a fresh start the count cards read 48 lockers in all and 48 free. With Large and Free pressed the wall shows only eight doors, but the cards still read 48 and 48, because the filters change which doors show, not the totals.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Large",
+      "Free",
+      "8 shown · 8 free"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "with nothing in any locker, pressing Holding says \"No locker matches these filters\" in the wall's place",
+    "criterion": 6,
+    "what_should_happen": "Every locker is free and Farida presses Holding, with All sizes still pressed. No doors show, and in their place the page says \"No locker matches these filters\" and \"Nothing is holding a parcel right now.\"",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Holding",
+      "No locker matches these filters",
+      "Nothing is holding a parcel right now."
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "with nothing in any locker, pressing Small as well says \"Nothing of this size is holding a parcel right now.\"",
+    "criterion": 6,
+    "what_should_happen": "Every locker is free and Farida presses Holding, then Small. No doors show, and the line under \"No locker matches these filters\" now speaks of the size: \"Nothing of this size is holding a parcel right now.\"",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Holding",
+      "Small",
+      "No locker matches these filters",
+      "Nothing is holding a parcel right now.",
+      "Nothing of this size is holding a parcel right now."
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "with every small locker holding, pressing Small and Free says \"Every locker of this size is in use.\"",
+    "criterion": 7,
+    "what_should_happen": "All twenty small lockers hold a parcel and Farida presses Small and Free. No doors show, and in their place the page says \"No locker matches these filters\" and \"Every locker of this size is in use.\"",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Small",
+      "Free",
+      "No locker matches these filters",
+      "Every locker of this size is in use."
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "with every locker of the wall holding, pressing Free alone says \"Every locker is in use.\"",
+    "criterion": 7,
+    "what_should_happen": "All forty-eight lockers hold a parcel and Farida presses Free, with All sizes still pressed. No doors show, and in their place the page says \"No locker matches these filters\" and \"Every locker is in use.\", not the words for one size.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Free",
+      "No locker matches these filters",
+      "Every locker is in use.",
+      "Every locker of this size is in use."
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "/caretaker/wall?size=XL says \"That is not a valid choice\", and \"Show the whole wall\" brings every door back",
+    "criterion": 8,
+    "what_should_happen": "The address asks for a size the wall does not have. In the wall's place the page says \"That is not a valid choice\" and \"Pick a size: small, medium or large.\", and its \"Show the whole wall\" button goes to /caretaker/wall with all 48 doors showing.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/components/Problem.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "That is not a valid choice",
+      "Pick a size: small, medium or large.",
+      "Show the whole wall"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "/caretaker/wall?tower=B says \"That tower is not here\" with \"Show the whole wall\"",
+    "criterion": 9,
+    "what_should_happen": "The address asks for tower B, which this parcel room does not serve. The page says \"That tower is not here\" and \"There is no tower B. This parcel room serves Tower A only.\", with a \"Show the whole wall\" button.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/components/Problem.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "That tower is not here",
+      "There is no tower B. This parcel room serves Tower A only.",
+      "Show the whole wall"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "typing 7 in the find box and pressing Enter opens D07's drawer and empties the box",
+    "criterion": 10,
+    "what_should_happen": "Typing just 7 in the find box and pressing Enter opens the drawer for D07, a small locker. The find box is empty again, ready for the next number.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Find a locker, e.g. D07",
+      "D07",
+      "Small locker"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "typing D41 in the find box works the same way",
+    "criterion": 10,
+    "what_should_happen": "Typing the full number D41 and pressing Enter opens the drawer for D41, a large locker. The find box is empty again.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Find a locker, e.g. D07",
+      "D41",
+      "Large locker"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "criterion": 10,
+    "checked_by": "browser",
+    "reason": "The found door being marked on the wall is a highlight, which is a colour and an outline."
+  },
+  {
+    "ticket": "F-04",
+    "test": "finding D99 opens a drawer that says \"No such locker\"",
+    "criterion": 11,
+    "what_should_happen": "Finding a door the wall does not have, D99, still opens the drawer. It says \"No such locker\" and \"Tower A has no locker D99. Lockers run from D01 to D48.\"",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "No such locker",
+      "Tower A has no locker D99. Lockers run from D01 to D48."
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "clicking free D05 opens a drawer with \"Small locker\", \"D05\", a picture of the door and the free line",
+    "criterion": 12,
+    "what_should_happen": "Clicking the free door D05 opens a drawer headed \"Small locker\" and \"D05\", with a picture of the door whose plate also reads D05. It says \"Free. Nothing is inside, so the next small parcel can go here.\"",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/components/Locker.jsx"
+    ],
+    "exact_words": [
+      "Locker D05, free",
+      "Small locker",
+      "D05",
+      "Free. Nothing is inside, so the next small parcel can go here."
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "clicking D21, holding P001 for flat 302, shows the parcel, the flat, the wait and until when its code works",
+    "criterion": 13,
+    "what_should_happen": "Parcel P001 for flat 302 went into D21 at 14:30 on Tuesday and has waited 3h 30m. Its drawer reads \"Medium locker\" and \"D21\", with Holding \"P001\", For \"Flat 302 · Rao\", Waiting \"3h 30m\" and Code \"Valid until Thu 5 Nov, 14:30\".",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/data/messages.js",
+      "src/data/format.js"
+    ],
+    "exact_words": [
+      "Locker D21, holding a parcel",
+      "Medium locker",
+      "D21",
+      "Holding",
+      "P001",
+      "For",
+      "Flat 302 · Rao",
+      "Waiting",
+      "3h 30m",
+      "Code",
+      "Valid until Thu 5 Nov, 14:30"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "criterion": 13,
+    "checked_by": "browser",
+    "reason": "The valid code being shown in green is a colour."
+  },
+  {
+    "ticket": "F-04",
+    "test": "a door whose code's free window has ended reads \"Expired\" with the day and time in its drawer",
+    "criterion": 14,
+    "what_should_happen": "A parcel has sat in D21 for more than 48 hours, past its code's free window. Its drawer reads Code \"Expired Thu 5 Nov, 14:30\", the moment the window ended, and no longer says \"Valid until\".",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Locker D21, holding a parcel",
+      "Code",
+      "Expired",
+      "Valid until"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "criterion": 14,
+    "checked_by": "browser",
+    "reason": "The expired code being shown in red is a colour."
+  },
+  {
+    "ticket": "F-04",
+    "test": "every drawer's foot says pickup codes are never shown, and no code appears in it",
+    "criterion": 15,
+    "what_should_happen": "A drawer for a holding door and a drawer for a free door both end with the same line, \"Pickup codes are never shown here: the wall keeps only a fingerprint of each one. The resident has the code.\" The six digits of the parcel's code appear nowhere in the holding door's drawer, neither together nor in two groups of three.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Pickup codes are never shown here: the wall keeps only a fingerprint of each one. The resident has the code.",
+      "Locker D21, holding a parcel",
+      "Locker D05, free",
+      "For",
+      "Flat 302 · Rao"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "while the clicked door is still being read, its drawer already shows \"Locker\" and the door's number",
+    "criterion": 16,
+    "what_should_happen": "In the first moment after a door is clicked, before its answer has arrived, the drawer already shows \"Locker\" and the door's number, D21, but no facts yet. A moment later the size, \"Medium locker\", and the facts fill in.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/hooks/useLoad.js"
+    ],
+    "exact_words": [
+      "Locker D21, holding a parcel",
+      "Locker",
+      "D21",
+      "For",
+      "Medium locker",
+      "Flat 302 · Rao"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "✕ (Close) closes the drawer and the focus goes back to the door it was opened from",
+    "criterion": 17,
+    "what_should_happen": "When the drawer opens, the focus sits on its ✕ button, named \"Close\". Pressing it closes the drawer and the focus goes back to door D05, which opened it.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Locker D05, free",
+      "Close"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "Esc closes the drawer, the filters stay as they were, and the focus goes back to the door",
+    "criterion": 17,
+    "what_should_happen": "With Large pressed, a drawer is opened from door D41. Esc closes it, the address still holds ?size=L, Large is still pressed with only the large doors showing, and the focus is back on D41.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "8 shown · 8 free",
+      "Locker D41, free",
+      "Large"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "test": "a drawer opened from the find box gives the focus back to the find box when it closes",
+    "criterion": 17,
+    "what_should_happen": "A drawer opened by typing 7 in the find box closes with Esc. The focus goes back to the find box it was opened from.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx"
+    ],
+    "exact_words": [
+      "Find a locker, e.g. D07"
+    ]
+  },
+  {
+    "ticket": "F-04",
+    "criterion": 17,
+    "checked_by": "browser",
+    "reason": "A click outside lands on the shade that covers the page beside the drawer, and only a real layout says where that shade is."
   }
 ]
