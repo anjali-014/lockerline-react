@@ -3,11 +3,7 @@ import ParcelBox from '../../components/ParcelBox.jsx';
 import { sizeName } from '../../data/building.js';
 import { formatDuration, formatWhen } from '../../data/format.js';
 import { expiryOf } from '../../data/messages.js';
-
-/** "3h 20m", or "less than a minute" for a parcel collected straight away. */
-function waitedText(seconds) {
-  return seconds < 60 ? 'less than a minute' : formatDuration(seconds);
-}
+import { waitedText } from './TakeParcel.jsx';
 
 /**
  * A parcel the resident has collected, from GET /parcels/{parcelId}: the parcel, the door it waited in,

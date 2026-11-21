@@ -2061,5 +2061,131 @@
       "Collect",
       "Code: 6 of 6 digits"
     ]
+  },
+  {
+    "ticket": "F-09",
+    "test": "the right code opens D22 with the parcel inside, and the caption tells how long it waited",
+    "criterion": 0,
+    "what_should_happen": "Mrs Rao keys the right code for D22, where her parcel has waited 3 hours 20 minutes, and presses \"Open my locker\". The keypad goes and the parcel waits inside D22, ready to be taken out. The caption reads \"Locker D22 is open\" and \"Your parcel waited 3h 20m. Take it out of the locker: drag it to the right, or tap it.\", and the tray says \"Drag your parcel here\".",
+    "look_at": [
+      "src/pages/resident/TakeParcel.jsx",
+      "src/pages/resident/Collect.jsx"
+    ],
+    "exact_words": [
+      "Locker D22 is open",
+      "Your parcel waited 3h 20m. Take it out of the locker: drag it to the right, or tap it.",
+      "Drag your parcel here"
+    ]
+  },
+  {
+    "ticket": "F-09",
+    "criterion": 0,
+    "checked_by": "browser",
+    "reason": "D22 standing open with the parcel drawn inside it is a drawing."
+  },
+  {
+    "ticket": "F-09",
+    "test": "a parcel that went in less than a minute ago \"waited less than a minute\"",
+    "criterion": 1,
+    "what_should_happen": "The parcel went in only seconds before its locker opens. The caption reads \"Your parcel waited less than a minute. Take it out of the locker: drag it to the right, or tap it.\"",
+    "look_at": [
+      "src/pages/resident/TakeParcel.jsx"
+    ],
+    "exact_words": [
+      "Your parcel waited less than a minute. Take it out of the locker: drag it to the right, or tap it."
+    ]
+  },
+  {
+    "ticket": "F-09",
+    "test": "taking the parcel out (the tap that stands in for a drag) puts it in the tray with its id and says \"Closing the locker…\"",
+    "criterion": 2,
+    "what_should_happen": "Taking the parcel out of D22 (a pretend browser cannot drag, so the tap that does the same job is used) moves it into the tray, where its label shows the parcel's id. The tray's \"Drag your parcel here\" goes and the caption says \"Closing the locker…\".",
+    "look_at": [
+      "src/pages/resident/TakeParcel.jsx"
+    ],
+    "exact_words": [
+      "Closing the locker…",
+      "Drag your parcel here"
+    ]
+  },
+  {
+    "ticket": "F-09",
+    "criterion": 2,
+    "checked_by": "browser",
+    "reason": "Dragging with a mouse, the tray lighting up while the parcel is held over it, and the door swinging shut need a real browser."
+  },
+  {
+    "ticket": "F-09",
+    "test": "tapping the parcel with a finger takes it out the same way",
+    "criterion": 3,
+    "what_should_happen": "A tap with a finger on the parcel takes it out, the same as a drag. The parcel sits in the tray with its id and the caption says \"Closing the locker…\".",
+    "look_at": [
+      "src/pages/resident/TakeParcel.jsx"
+    ],
+    "exact_words": [
+      "Closing the locker…"
+    ]
+  },
+  {
+    "ticket": "F-09",
+    "test": "about a second later the caption says \"All done\" and \"Locker D22 is closed and free for the next parcel.\", with OK",
+    "criterion": 4,
+    "what_should_happen": "Right after the parcel comes out the door is still closing and there is no OK button yet. About a second later the caption says \"All done\" and \"Locker D22 is closed and free for the next parcel.\", and an OK button shows.",
+    "look_at": [
+      "src/pages/resident/TakeParcel.jsx"
+    ],
+    "exact_words": [
+      "OK",
+      "All done",
+      "Locker D22 is closed and free for the next parcel.",
+      "Closing the locker…"
+    ]
+  },
+  {
+    "ticket": "F-09",
+    "test": "OK goes to My parcels, where the parcel now shows under Collected",
+    "criterion": 5,
+    "what_should_happen": "With \"All done\" showing, pressing OK goes to My parcels at /resident. The parcel from D22 now shows in the Collected section.",
+    "look_at": [
+      "src/pages/resident/Collect.jsx",
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "OK",
+      "Collected",
+      "D22"
+    ]
+  },
+  {
+    "ticket": "F-09",
+    "test": "with nothing else waiting for the flat, after OK the title row has no tabs",
+    "criterion": 6,
+    "what_should_happen": "The locker has opened and nothing else is waiting for flat 302. After OK the title row has no tabs: Collect is gone, and My parcels alone is not a choice.",
+    "look_at": [
+      "src/components/SectionTabs.jsx",
+      "src/pages/resident/MyParcels.jsx"
+    ],
+    "exact_words": [
+      "OK",
+      "Collected",
+      "Collect",
+      "My parcels"
+    ]
+  },
+  {
+    "ticket": "F-09",
+    "test": "once the locker has opened, Farida's wall shows D22 free",
+    "criterion": 7,
+    "what_should_happen": "Mrs Rao's code has opened D22. When Farida opens the wall, door D22 is shown free.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/components/Locker.jsx"
+    ],
+    "exact_words": [
+      "D22",
+      "free",
+      "LockerLine home",
+      "Continue as Farida"
+    ]
   }
 ]

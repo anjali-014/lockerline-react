@@ -1,11 +1,12 @@
 import { formatDuration } from '../data/format.js';
 
 /**
- *  One locker door, drawn as a real panel: a dark recess behind a brushed-aluminium door with a
+ * One locker door, drawn as a real panel: a dark recess behind a brushed-aluminium door with a
  * number plate, a handle and a status light. `open` swings the door out in 3D; a holding door
  * carries an orange parcel tag and shows how long it has waited (`dwellSeconds`). `closing` swings an open door shut.
+ * `children` are drawn inside the locker, behind the door (the parcel a resident takes out).
  */
-export default function Locker({ door, selected = false, open = false, closing = false, showWait = true, onClick, style }) {
+export default function Locker({ door, selected = false, open = false, closing = false, showWait = true, onClick, style, children }) {
   const holding = door.state === 'holding';
   const Tag = onClick ? 'button' : 'div';
 
@@ -18,8 +19,9 @@ export default function Locker({ door, selected = false, open = false, closing =
       aria-label={onClick ? `Locker ${door.no}, ${holding ? 'holding a parcel' : 'free'}` : undefined}
     >
       {/* the inside of the locker: what is drawn here sits behind the door and is cut to the opening */}
-      <span className="locker-recess" aria-hidden="true">
+      <span className="locker-recess" aria-hidden={children ? undefined : 'true'}>
         {holding && <span className="locker-parcel" />}
+        {children}
       </span>
       <span className="locker-door" aria-hidden={!onClick}>
         <span className="locker-plate">{door.no}</span>

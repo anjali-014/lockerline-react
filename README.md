@@ -14,7 +14,7 @@
 - [x] Ticket 6 · Putting the parcel in
 - [x] Ticket 7 · My parcels
 - [x] Ticket 8 · The lobby keypad
-- [ ] Ticket 9 · The door opens
+- [x] Ticket 9 · The door opens
 - [ ] Ticket 10 · The parcel book
 
 ## Run it
