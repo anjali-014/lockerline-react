@@ -10,7 +10,7 @@
 - [x] Ticket 2 · Moving between people
 - [x] Ticket 3 · The wall
 - [x] Ticket 4 · Finding one locker
-- [ ] Ticket 5 · The courier asks for a locker
+- [x] Ticket 5 · The courier asks for a locker
 - [ ] Ticket 6 · Putting the parcel in
 - [ ] Ticket 7 · My parcels
 - [ ] Ticket 8 · The lobby keypad

@@ -1103,5 +1103,295 @@
     "criterion": 17,
     "checked_by": "browser",
     "reason": "A click outside lands on the shade that covers the page beside the drawer, and only a real layout says where that shade is."
+  },
+  {
+    "ticket": "F-05",
+    "test": "on an empty wall the form shows the three sizes with what fits and how many are free, the flat box and \"Get a locker\"",
+    "criterion": 0,
+    "what_should_happen": "On a fresh start step 1, \"Parcel size\", offers three choices: Small (\"Envelopes, books, phone boxes\", \"20 free\"), Medium (\"Shoe boxes, groceries, kits\", \"20 free\") and Large (\"Monitors, cartons, luggage\", \"8 free\"). Step 2, \"Flat number\", is a box whose help reads \"Written on the parcel label. Flats 101 to 404.\", and under it is the \"Get a locker\" button.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx",
+      "src/data/building.js"
+    ],
+    "exact_words": [
+      "Parcel size",
+      "Small",
+      "Envelopes, books, phone boxes",
+      "Medium",
+      "Shoe boxes, groceries, kits",
+      "Large",
+      "Monitors, cartons, luggage",
+      "20 free",
+      "8 free",
+      "Flat number",
+      "Written on the parcel label. Flats 101 to 404.",
+      "Get a locker"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "beside the form a panel waits: \"Your locker appears here\"",
+    "criterion": 1,
+    "what_should_happen": "Before anything is asked, the panel beside the form waits. It says \"Your locker appears here\" and \"Pick the parcel's size, type the flat number, and the wall chooses a locker for you.\"",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "Your locker appears here",
+      "Pick the parcel's size, type the flat number, and the wall chooses a locker for you."
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "clicking the Medium card chooses it, and only one size can be chosen at a time",
+    "criterion": 2,
+    "what_should_happen": "Clicking the Small card chooses Small. Clicking the Medium card then chooses Medium, and Small and Large are no longer chosen: only one size at a time.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "Small",
+      "Medium",
+      "Large"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "criterion": 2,
+    "checked_by": "browser",
+    "reason": "How the chosen card is marked (its outline and colour) is only visible in a real browser."
+  },
+  {
+    "ticket": "F-05",
+    "test": "typing 302 in the flat box shows \"Rao\"",
+    "criterion": 3,
+    "what_should_happen": "No family name shows while the flat box is empty. As soon as 302 is typed, the family's name \"Rao\" appears.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx",
+      "src/data/building.js"
+    ],
+    "exact_words": [
+      "Rao"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "criterion": 3,
+    "checked_by": "browser",
+    "reason": "The tick, and the name sitting inside the box, are a drawing and a position."
+  },
+  {
+    "ticket": "F-05",
+    "test": "typing 30, or 999, shows no name",
+    "criterion": 4,
+    "what_should_happen": "Typing only 30, or a flat that does not exist like 999, shows no name: nothing else on the screen changes. Typing 302 afterwards does show \"Rao\".",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "Rao"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "Medium and flat 999 is refused in place: \"Flat 999 is not in Tower A.\" and \"Unknown flat\", and no count changes",
+    "criterion": 5,
+    "what_should_happen": "Asking for a medium locker for flat 999 is refused. Under the flat box it says \"Flat 999 is not in Tower A.\", and the panel says \"Unknown flat\" and \"There is no flat 999 in this tower. Nothing was booked and no locker was taken.\" The size cards still read 20, 20 and 8 free.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx",
+      "src/data/messages.js",
+      "src/components/Problem.jsx"
+    ],
+    "exact_words": [
+      "Medium",
+      "Get a locker",
+      "Flat 999 is not in Tower A.",
+      "Unknown flat",
+      "There is no flat 999 in this tower",
+      "Nothing was booked and no locker was taken.",
+      "20 free",
+      "8 free"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "criterion": 5,
+    "checked_by": "browser",
+    "reason": "The words under the flat box being red is a colour."
+  },
+  {
+    "ticket": "F-05",
+    "test": "with no size and no flat, both fields show their error and the panel says \"That is not a valid choice\"",
+    "criterion": 6,
+    "what_should_happen": "Pressing \"Get a locker\" with nothing filled in is refused. Under the sizes it says \"Choose small, medium or large.\" and under the flat box \"A flat number is three digits, like 302.\" The panel says \"That is not a valid choice\", \"Pick a size: small, medium or large. Type the flat number first.\" and \"Nothing was booked and no locker was taken.\"",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Get a locker",
+      "Choose small, medium or large.",
+      "A flat number is three digits, like 302.",
+      "That is not a valid choice",
+      "Pick a size: small, medium or large.",
+      "Type the flat number first.",
+      "Nothing was booked and no locker was taken."
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "with a size but no flat, only the flat box shows its error and the panel says \"Type the flat number first.\"",
+    "criterion": 7,
+    "what_should_happen": "With Small chosen and the flat box empty, pressing \"Get a locker\" is refused for the flat only. Only the flat box shows \"A flat number is three digits, like 302.\", there are no words under the sizes, and the panel says \"Type the flat number first.\"",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Small",
+      "Get a locker",
+      "A flat number is three digits, like 302.",
+      "Choose small, medium or large.",
+      "Type the flat number first."
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "choosing a size after an error takes the errors and the message away and brings the waiting panel back",
+    "criterion": 8,
+    "what_should_happen": "After a refused form, choosing a size takes every error away. The words under the fields and the panel's message go, and \"Your locker appears here\" is back.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "Get a locker",
+      "Choose small, medium or large.",
+      "A flat number is three digits, like 302.",
+      "Large",
+      "Your locker appears here"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "changing the flat after an error takes the errors and the message away and brings the waiting panel back",
+    "criterion": 8,
+    "what_should_happen": "After flat 999 is refused, changing the flat takes the error away. \"Flat 999 is not in Tower A.\" and \"Unknown flat\" go, and \"Your locker appears here\" is back.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "Medium",
+      "Get a locker",
+      "Flat 999 is not in Tower A.",
+      "Unknown flat",
+      "Your locker appears here"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "with every large locker holding, the Large card reads \"Full\"",
+    "criterion": 9,
+    "what_should_happen": "All eight large lockers hold a parcel. The Large card reads \"Full\" instead of a count, while Medium still reads \"20 free\".",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "Large",
+      "Monitors, cartons, luggage",
+      "Full",
+      "Medium",
+      "Shoe boxes, groceries, kits",
+      "20 free"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "criterion": 9,
+    "checked_by": "browser",
+    "reason": "The card looking full is a colour and a faded look."
+  },
+  {
+    "ticket": "F-05",
+    "test": "asking for a full size says \"No free locker of that size\" and offers the sizes that are free right now",
+    "criterion": 10,
+    "what_should_happen": "Every large locker is holding and a large locker is asked for flat 302. The panel says \"No free locker of that size\" and \"Free right now: small and medium.\", with the buttons \"Use a small locker\" and \"Use a medium locker\" (no large one) and the line about waiting or taking the parcel back to the depot.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Large",
+      "Get a locker",
+      "No free locker of that size",
+      "Free right now: small and medium.",
+      "Use a small locker",
+      "Use a medium locker",
+      "If it fits nowhere else, wait for a locker to free up or take the parcel back to the depot."
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "\"Use a medium locker\" chooses Medium, takes the message away and keeps the flat",
+    "criterion": 11,
+    "what_should_happen": "After a large locker was refused, the courier clicks \"Use a medium locker\". Medium becomes the chosen size, the message goes, and the flat box still holds 302 with \"Rao\".",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx"
+    ],
+    "exact_words": [
+      "Use a medium locker",
+      "Medium",
+      "Large",
+      "No free locker of that size",
+      "Rao"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "with every locker holding, any size gets \"Every locker in the wall is holding a parcel.\" and no buttons",
+    "criterion": 12,
+    "what_should_happen": "All 48 lockers hold a parcel and a small locker is asked for. The panel says \"No free locker of that size\" and \"Every locker in the wall is holding a parcel.\", and offers no buttons.",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Small",
+      "Get a locker",
+      "No free locker of that size",
+      "Every locker in the wall is holding a parcel."
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "when a medium locker is given, the Medium card goes from \"20 free\" to \"19 free\"",
+    "criterion": 13,
+    "what_should_happen": "Twenty medium lockers are free and a medium locker is asked for flat 302. Once a locker is given, the Medium card reads \"19 free\" and Small still reads \"20 free\".",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx",
+      "src/state/LockerContext.jsx"
+    ],
+    "exact_words": [
+      "Medium",
+      "Get a locker",
+      "19 free",
+      "20 free"
+    ]
+  },
+  {
+    "ticket": "F-05",
+    "test": "before the free lockers are read the size cards show no count, then the counts fill in",
+    "criterion": 14,
+    "what_should_happen": "In the first moment, before the wall has answered, the size cards are there but show no count at all, not 0 and not \"Full\". A moment later the counts fill in, with Large reading \"8 free\".",
+    "look_at": [
+      "src/pages/courier/DropOff.jsx",
+      "src/hooks/useLoad.js"
+    ],
+    "exact_words": [
+      "Small",
+      "Full",
+      "Large",
+      "Monitors, cartons, luggage",
+      "8 free"
+    ]
   }
 ]

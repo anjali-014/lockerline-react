@@ -9,6 +9,7 @@ export function LockerProvider({ children }) {
   const [now, setNow] = useState(Date.now);
   const [version, setVersion] = useState(0);
 
+  /**  A drop or a pickup went through: every screen reads its data again, as a real frontend refetches after a POST. */
   /** The data may have changed: every screen reads its data again, as a real frontend refetches. */
   const changed = useCallback(() => {
     setNow(Date.now());
@@ -20,8 +21,7 @@ export function LockerProvider({ children }) {
     const timer = setInterval(changed, 20_000);
     return () => clearInterval(timer);
   }, [changed]);
-
-  const value = { residentFlat, setResidentFlat, now, version };
+  const value = { residentFlat, setResidentFlat, now, version, changed};
   return <LockerContext.Provider value={value}>{children}</LockerContext.Provider>;
 }
 

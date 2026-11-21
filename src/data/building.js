@@ -3,9 +3,9 @@
 export const BUILDING = { name: 'Sunrise Heights', tower: 'A' };
 
 export const SIZES = [
-  { id: 'S', name: 'Small' },
-  { id: 'M', name: 'Medium' },
-  { id: 'L', name: 'Large' },
+  { id: 'S', name: 'Small', fits: 'Envelopes, books, phone boxes' },
+  { id: 'M', name: 'Medium', fits: 'Shoe boxes, groceries, kits' },
+  { id: 'L', name: 'Large', fits: 'Monitors, cartons, luggage' },
 ];
 
 export function sizeName(id) {

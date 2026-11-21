@@ -2,10 +2,20 @@
 // gives one shape (type, title, status, detail, and for a form the fields it could not take); this turns
 // the type and its facts into a sentence and a next step. The backend's own wording never reaches the screen.
 
+const SIZE_WORDS = { S: 'small', M: 'medium', L: 'large' };
+
 /** What to do about each field the backend could not take, whatever was wrong with it. */
 const FIELD_WORDS = {
   size: 'Pick a size: small, medium or large.',
+  sizeClass: 'Pick a size: small, medium or large.',
   state: 'Pick a state: free or holding.',
+  flat: 'Type the flat number first.',
+};
+
+/** The words under each field of the drop-off form, for the fields the backend could not take. */
+const FORM_WORDS = {
+  sizeClass: 'Choose small, medium or large.',
+  flat: 'A flat number is three digits, like 302.',
 };
 
 /** One sentence per field the backend named, each said once. */
@@ -26,7 +36,7 @@ function missing(about) {
 
 /**
  * The title and text a person sees for a refusal. `about` holds what the screen asked about (the
- * tower, the locker number), so the words name it the way the screen does.
+ *  tower, the locker number, the flat), so the words name it the way the screen does.
  */
 export function explain(answer, about = {}) {
   const body = answer.body ?? {};
@@ -41,9 +51,33 @@ export function explain(answer, about = {}) {
       return { title: 'No such locker', text: `Tower ${about.tower} has no locker ${about.no}. Lockers run from D01 to D48.` };
     case '/errors/validation':
       return { title: 'That is not a valid choice', text: fieldsText(body.errors) };
+    case '/errors/no-such-flat': {
+      const flat = about.flat ? `There is no flat ${about.flat} in this tower` : 'That flat is not in this tower';
+      return { title: 'Unknown flat', text: `${flat}. Nothing was booked and no locker was taken.` };
+    }
+    case '/errors/no-door-free': {
+      const sizes = (body.freeSizes ?? []).map((s) => SIZE_WORDS[s]);
+      return {
+        title: 'No free locker of that size',
+        text: sizes.length ? `Free right now: ${sizes.join(' and ')}.` : 'Every locker in the wall is holding a parcel.',
+      };
+    }
     default:
       return { title: 'That did not work', text: 'Please try again.' };
   }
+}
+
+/**
+ * The drop-off form's words under its fields for this answer: { sizeClass?, flat? }. A refused form
+ * names each field that failed; an unknown flat is about the flat box.
+ */
+export function formErrors(answer, flat) {
+  const errors = {};
+  if (answer?.body?.type === '/errors/validation') {
+    for (const e of answer.body.errors ?? []) if (FORM_WORDS[e.field]) errors[e.field] = FORM_WORDS[e.field];
+  }
+  if (answer?.body?.type === '/errors/no-such-flat') errors.flat = `Flat ${flat} is not in Tower A.`;
+  return errors;
 }
 
 /**
