@@ -27,9 +27,10 @@ function fieldsText(errors = []) {
 
 /**
  * A path nothing serves (an id typed with a slash, an empty tower) is said as the thing that is not
- * there: `about` holds what the screen asked for (tower, locker no).
+ * there: `about` holds what the screen asked for (tower, locker no, parcelId).
  */
 function missing(about) {
+  if (about.parcelId !== undefined) return '/errors/no-such-parcel';
   if (about.no !== undefined && about.tower && !about.tower.includes('/')) return '/errors/no-such-door';
   if (about.tower !== undefined) return '/errors/no-such-tower';
   return null;
@@ -37,7 +38,7 @@ function missing(about) {
 
 /**
  * The title and text a person sees for a refusal. `about` holds what the screen asked about (the
- *  tower, the locker number, the flat), so the words name it the way the screen does.
+ * tower, the locker number, the flat, the parcel id), so the words name it the way the screen does.
  */
 export function explain(answer, about = {}) {
   const body = answer.body ?? {};
@@ -66,6 +67,7 @@ export function explain(answer, about = {}) {
     case '/errors/no-such-code': return { title: "That code doesn't match a parcel", text: 'Check the digits and try again.' };
     case '/errors/code-expired': return { title: 'This code has expired', text: 'Its free window has ended, so it can no longer open the locker.' };
     case '/errors/code-used': return { title: 'This code was already used', text: 'A code opens its locker once. The parcel has been collected.' };
+    case '/errors/no-such-parcel': return { title: 'No such parcel', text: about.parcelId ? `There is no parcel ${about.parcelId}.` : 'There is no such parcel.' };
     default:
       return { title: 'That did not work', text: 'Please try again.' };
   }

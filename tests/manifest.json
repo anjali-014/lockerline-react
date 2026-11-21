@@ -2187,5 +2187,337 @@
       "LockerLine home",
       "Continue as Farida"
     ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "with no parcel in a locker, \"In the wall now\" says \"No parcel is waiting\"",
+    "criterion": 0,
+    "what_should_happen": "No parcel is in any locker. Under \"In the wall now\" the page says \"No parcel is waiting\" and \"When a courier drops one, it appears here. A collected parcel's record opens from its id.\"",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx"
+    ],
+    "exact_words": [
+      "In the wall now",
+      "No parcel is waiting",
+      "When a courier drops one, it appears here. A collected parcel's record opens from its id."
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "two parcels in the wall make a table with a row each, in locker order, P001 reading \"302 · Rao\", D21, Medium and \"In the wall\"",
+    "criterion": 1,
+    "what_should_happen": "P001 waits in D21 for 302 and P002 in D01 for 304. A table with the columns Parcel, Flat, Locker, Waiting and Status has a row for each in locker order, so P002 in D01 comes first. P001's row reads \"P001\", \"302 · Rao\", \"D21\" with \"Medium\", its wait of 3h 20m, and \"In the wall\".",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx"
+    ],
+    "exact_words": [
+      "Parcel",
+      "Flat",
+      "Locker",
+      "Waiting",
+      "Status",
+      "P001",
+      "P002",
+      "302 · Rao",
+      "D21",
+      "Medium",
+      "In the wall"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "a parcel still in its locker after its free window reads \"Code expired\" in its row",
+    "criterion": 2,
+    "what_should_happen": "A parcel has sat in its locker past its code's 48-hour free window. Its row's label reads \"Code expired\" instead of \"In the wall\".",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Code expired",
+      "In the wall"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "criterion": 2,
+    "checked_by": "browser",
+    "reason": "The \"Code expired\" label being red is a colour."
+  },
+  {
+    "ticket": "F-10",
+    "test": "collected parcels show under \"Collected\" with their count, one box each, the most recently collected first",
+    "criterion": 3,
+    "what_should_happen": "Two parcels have been collected, P001 first and P002 an hour later. A \"Collected\" heading shows the count 2, and the shelf has one box per parcel labelled with its id, P002 first because it was collected last.",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx"
+    ],
+    "exact_words": [
+      "Collected",
+      "P002, collected by flat 304. Open its notebook",
+      "P001, collected by flat 302. Open its notebook",
+      "P002"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "clicking anywhere on a row opens that parcel's notebook over the page",
+    "criterion": 4,
+    "what_should_happen": "Clicking anywhere on P001's row, here on its label, opens P001's notebook. It opens over the Parcels page, which is still there underneath.",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx",
+      "src/components/ParcelNotebook.jsx"
+    ],
+    "exact_words": [
+      "In the wall",
+      "P001",
+      "In the wall now"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "a row's arrow, \"Open P001's notebook\", opens its notebook",
+    "criterion": 4,
+    "what_should_happen": "Each row ends with an arrow button named \"Open P001's notebook\". Pressing it opens P001's notebook.",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx"
+    ],
+    "exact_words": [
+      "Open P001's notebook",
+      "P001"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "a box on the Collected shelf opens its notebook",
+    "criterion": 4,
+    "what_should_happen": "A collected parcel's box on the shelf is a button named \"P001, collected by flat 302. Open its notebook\". Pressing it opens P001's notebook.",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx"
+    ],
+    "exact_words": [
+      "P001, collected by flat 302. Open its notebook",
+      "P001"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "typing P001 in \"Open a parcel, e.g. P001\" and pressing Open opens its notebook",
+    "criterion": 5,
+    "what_should_happen": "Typing P001 in the \"Open a parcel, e.g. P001\" box and pressing the Open button opens P001's notebook. It opens over the page, with P001 as its heading.",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx"
+    ],
+    "exact_words": [
+      "Open a parcel, e.g. P001",
+      "Open",
+      "P001"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "typing just 1 and pressing Enter opens P001's notebook",
+    "criterion": 5,
+    "what_should_happen": "Typing just 1 in the box and pressing Enter opens the notebook of P001. Its stamp reads \"In the wall\".",
+    "look_at": [
+      "src/pages/caretaker/Parcels.jsx"
+    ],
+    "exact_words": [
+      "Open a parcel, e.g. P001",
+      "P001",
+      "In the wall"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "the notebook of P001, still in D21, shows its stamp, four facts and the two lines that can't be edited",
+    "criterion": 6,
+    "what_should_happen": "P001 went into D21 for 302 at 14:30 on Tuesday and is still there. Its notebook reads \"Parcel notebook · Tower A\", \"P001\" and the stamp \"In the wall\", with Locker \"D21\" \"Medium\", For \"Flat 302\" \"Rao family\", Dropped Tue 3 Nov \"at 14:30\" and Code \"Valid until\" Thu 5 Nov, 14:30. Under \"What happened\", marked \"Can’t be edited\", are exactly two lines, \"Dropped into locker D21\" and \"Code issued for 48 hours\" with \"valid until\" Thu 5 Nov, 14:30, each with its day and time.",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx"
+    ],
+    "exact_words": [
+      "Open P001's notebook",
+      "Parcel notebook · Tower A",
+      "P001",
+      "In the wall",
+      "Locker",
+      "D21",
+      "Medium",
+      "For",
+      "Flat 302",
+      "Rao family",
+      "Dropped",
+      "at 14:30",
+      "Code",
+      "Valid until",
+      "What happened",
+      "Can’t be edited",
+      "Dropped into locker D21",
+      "Code issued for 48 hours",
+      "valid until"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "the notebook of a collected P001 is stamped \"Collected\", its code \"Used\", with a third line \"Collected from locker D21\"",
+    "criterion": 7,
+    "what_should_happen": "P001 was collected 3 hours 20 minutes after it was dropped. Its notebook is stamped \"Collected\", Code reads \"Used\" with when, and a third line reads \"Collected from locker D21\" with its day and time and \"waited 3h 20m\".",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx"
+    ],
+    "exact_words": [
+      "Collected",
+      "Code",
+      "Used",
+      "Collected from locker D21",
+      "waited 3h 20m"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "a parcel collected straight away says \"waited under a minute\" in its third line",
+    "criterion": 7,
+    "what_should_happen": "P001 was collected straight after it was dropped. The third line of its notebook reads \"Collected from locker D21\" with \"waited under a minute\".",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx"
+    ],
+    "exact_words": [
+      "Collected from locker D21",
+      "waited under a minute"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "the notebook of a parcel past its free window is stamped \"Code expired\", its code \"Expired\" with when",
+    "criterion": 8,
+    "what_should_happen": "P001 has sat in its locker past its code's free window. Its notebook is stamped \"Code expired\", and Code reads \"Expired\" with Thu 5 Nov, 14:30, when the window ended.",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx"
+    ],
+    "exact_words": [
+      "Open P001's notebook",
+      "Code expired",
+      "Code",
+      "Expired"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "opening P999, which does not exist, says \"No page for “P999” in this notebook.\" and \"No such parcel\"",
+    "criterion": 9,
+    "what_should_happen": "Opening P999, a parcel that does not exist, still opens the notebook. It says \"No page for “P999” in this notebook.\", \"No such parcel\", \"There is no parcel P999.\" and \"Parcel ids look like P001. A refused drop never gets a page, because nothing happened to a parcel.\"",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx",
+      "src/data/messages.js"
+    ],
+    "exact_words": [
+      "Open a parcel, e.g. P001",
+      "No page for “P999” in this notebook.",
+      "No such parcel",
+      "There is no parcel P999",
+      "Parcel ids look like",
+      "A refused drop never gets a page, because nothing happened to a parcel."
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "the foot of a notebook explains \"How this notebook works\"",
+    "criterion": 10,
+    "what_should_happen": "At the foot of every notebook a note reads \"How this notebook works\". It explains that every change adds a line and nothing is rewritten or removed, and that the notebook closes with ×, Esc or a click outside.",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx"
+    ],
+    "exact_words": [
+      "How this notebook works",
+      "Every change to a parcel adds a line here, written together with the change itself. A refused drop leaves no line. Lines are only ever added: nothing is rewritten or removed.",
+      "It opens over the page you are on. Close it with ×, Esc or a click outside and you are right where you were."
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "a notebook offers no way to change or remove a line",
+    "criterion": 11,
+    "what_should_happen": "Nothing in an open notebook lets a line be changed or removed. There is no box to type in, and its only button is the one that closes it.",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx"
+    ],
+    "exact_words": [
+      "Open P001's notebook",
+      "What happened",
+      "Close the notebook"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "× (Close the notebook) closes it and leaves the page and the address as they were",
+    "criterion": 12,
+    "what_should_happen": "Opening a notebook does not change the address, which stays /caretaker/parcels. Pressing × (\"Close the notebook\") closes it, and the Parcels page is there as it was, with the same address.",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx",
+      "src/pages/caretaker/Parcels.jsx"
+    ],
+    "exact_words": [
+      "Open P001's notebook",
+      "Close the notebook",
+      "In the wall now"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "Esc closes the notebook and the address never changed",
+    "criterion": 12,
+    "what_should_happen": "When the notebook opens the focus sits on its × button. Esc closes it, the address is still /caretaker/parcels, and the focus is back on the arrow that opened it.",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx"
+    ],
+    "exact_words": [
+      "Open P001's notebook",
+      "Close the notebook"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "criterion": 12,
+    "checked_by": "browser",
+    "reason": "A click outside lands on the shade that covers the page around the notebook, and only a real layout says where that shade is."
+  },
+  {
+    "ticket": "F-10",
+    "criterion": 13,
+    "checked_by": "browser",
+    "reason": "Only the notebook's page scrolling, with a slim bar of its own, needs real heights and a real scroll; a pretend browser has neither."
+  },
+  {
+    "ticket": "F-10",
+    "test": "a notebook whose record is not read yet already shows the id asked for and the note on how it works",
+    "criterion": 14,
+    "what_should_happen": "In the first moment after a notebook is asked for, before its record has been read, it already shows the id P001 and the note \"How this notebook works\", but no facts or lines. A moment later \"What happened\" and the lines appear.",
+    "look_at": [
+      "src/components/ParcelNotebook.jsx",
+      "src/hooks/useLoad.js"
+    ],
+    "exact_words": [
+      "Open P001's notebook",
+      "P001",
+      "How this notebook works",
+      "What happened",
+      "Dropped into locker D21"
+    ]
+  },
+  {
+    "ticket": "F-10",
+    "test": "on the wall, \"Open the parcel's notebook\" in D21's drawer opens P001's notebook over the wall",
+    "criterion": 15,
+    "what_should_happen": "On the wall, D21 holds P001 and its drawer is open. Pressing \"Open the parcel's notebook\" closes the drawer and opens P001's notebook over the wall, and closing the notebook leaves Farida on the wall.",
+    "look_at": [
+      "src/pages/caretaker/Wall.jsx",
+      "src/components/ParcelNotebook.jsx"
+    ],
+    "exact_words": [
+      "Open the parcel's notebook",
+      "P001",
+      "D21"
+    ]
   }
 ]

@@ -21,7 +21,7 @@ export default function App() {
           <Route path="/caretaker" element={<Navigate to="/caretaker/wall" replace />} />
           <Route path="/caretaker/wall" element={<Wall />} />
           <Route path="/caretaker/parcels" element={<Parcels />} />
-          {/* an address for one parcel lands on Parcels */}
+          {/*  a parcel's record opens as a notebook over the page; old record links land on Parcels*/}
           <Route path="/caretaker/parcels/:id" element={<Navigate to="/caretaker/parcels" replace />} />
           <Route path="/courier" element={<DropOff />} />
           <Route path="/resident" element={<MyParcels />} />
